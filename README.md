@@ -1,0 +1,1 @@
+![Architecture](error_log_remediation_-_automation.png)
