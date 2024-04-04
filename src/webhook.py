@@ -4,9 +4,14 @@ import os
 import utils
 from openai import OpenAI
 import json
+import logging
 
 app = Flask(__name__)
 CORS(app)
+
+# Set up the logging configuration
+logging.basicConfig(filename='app.log', level=logging.INFO,
+                    format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
 
 client = OpenAI()
 client.api_key = os.environ.get("OPENAI_API_KEY")
@@ -16,7 +21,26 @@ DOCU_ASSISTANT_ID = os.environ.get("ASSISTANT_ID")
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    try:
+        print("Hello World!")
+        logging.info("Hello World!")
+        return "Hello World!"
+    except Exception as e:
+        logging.error(f"Error occurred: {e}")
+        return "Error occurred"
+    
+@app.route("/error")
+def file_throw_error():
+    try:
+        # Attempt to open a non-existent file
+        with open('non_existent_file.txt', 'r') as file:
+            data = file.read()
+        logging.info("File contents: " + data)
+        return "File Exists"
+    except FileNotFoundError:
+        print('The file does not exist.')
+        logging.error('The file does not exist.')
+        return "File does not exist"
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
