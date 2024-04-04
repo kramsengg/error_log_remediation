@@ -79,6 +79,7 @@ def webhook():
         return jsonify(response_data)
     else:
         response_data = jsonify({"result":"error log is empty"})
+        print(response_data)
         return response_data
 
 @app.route('/get_remediations', methods=['POST'])
