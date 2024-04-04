@@ -29,7 +29,7 @@ def hello():
         logging.error(f"Error occurred: {e}")
         return "Error occurred"
     
-@app.route("/error")
+@app.route("/filecheck")
 def file_throw_error():
     try:
         # Attempt to open a non-existent file
