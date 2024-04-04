@@ -54,6 +54,7 @@ def webhook():
     data = request.json
     print("Received alert:", data)
     query = request.json['body']
+    print("BODY Content :", query)
     query1 = """
         [Sun Jul 09 03:25:02 2017] [notice] Apache/2.2.32 (Unix) DAV/2 configured -- resuming normal operations
         [Sun Jul 09 04:06:13 2017] [error] [client 1.2.3.4] File does not exist: /var/www/html/robots.txt
