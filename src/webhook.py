@@ -54,7 +54,7 @@ def webhook():
     data = request.json
     print("Received alert:", data)
     query = request.json['body']
-    query = """
+    query1 = """
         [Sun Jul 09 03:25:02 2017] [notice] Apache/2.2.32 (Unix) DAV/2 configured -- resuming normal operations
         [Sun Jul 09 04:06:13 2017] [error] [client 1.2.3.4] File does not exist: /var/www/html/robots.txt
         [Mon Jul 10 20:24:52 2017] [error] (111)Connection refused: proxy: HTTP: attempt to connect to 127.0.0.1:8484 (localhost) failed
@@ -73,7 +73,7 @@ def get_remediations_error_logs():
     # Your search logic here
     query = request.json['body']
     #Sample Error logs:
-    query = """
+    query1 = """
         [Sun Jul 09 03:25:02 2017] [notice] Apache/2.2.32 (Unix) DAV/2 configured -- resuming normal operations
         [Sun Jul 09 04:06:13 2017] [error] [client 1.2.3.4] File does not exist: /var/www/html/robots.txt
         [Mon Jul 10 20:24:52 2017] [error] (111)Connection refused: proxy: HTTP: attempt to connect to 127.0.0.1:8484 (localhost) failed
