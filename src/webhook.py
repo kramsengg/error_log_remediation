@@ -5,6 +5,7 @@ import utils
 from openai import OpenAI
 import json
 import logging
+import re
 
 app = Flask(__name__)
 CORS(app)
@@ -60,6 +61,18 @@ def webhook():
         [Sun Jul 09 04:06:13 2017] [error] [client 1.2.3.4] File does not exist: /var/www/html/robots.txt
         [Mon Jul 10 20:24:52 2017] [error] (111)Connection refused: proxy: HTTP: attempt to connect to 127.0.0.1:8484 (localhost) failed
     """
+
+    # Regular expression to match content between %%% and @webhook
+    pattern = r'%%%(.+?)@webhook'
+    match = re.search(pattern, query, re.DOTALL)
+
+    if match:
+        extracted_content = match.group(1).strip()
+        global refined_query
+        refined_query = extracted_content
+        print(refined_query)
+
+    print("REFINED QUERY ", refined_query)   
     # Here you can add code to process the error logs and send them to OpenAI API
     response_data = utils.get_remediations_for_error(client,DOCU_ASSISTANT_ID, query)
     return jsonify(response_data)
