@@ -37,9 +37,9 @@ def file_throw_error():
             data = file.read()
         logging.info("File contents: " + data)
         return "File Exists"
-    except FileNotFoundError:
+    except FileNotFoundError as error:
         print('The file does not exist.')
-        logging.error('The file does not exist.')
+        logging.error(str(error))
         return "File does not exist"
 
 @app.route('/webhook', methods=['POST'])
