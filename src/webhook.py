@@ -51,9 +51,9 @@ def webhook():
         utils.create_environment_variable("ASSISTANT_ID", DOCU_ASSISTANT_ID)
         #print("OS ENV VALUE: ", os.environ.get("ASSISTANT_ID")) 
     
-    #print("REQUEST : ", request)
+    print("REQUEST : ", request)
     data = request.json
-    #print("Received alert:", data)
+    print("Received alert:", data)
     query = request.json['body']
     print("BODY Content :", query)
     query1 = """
