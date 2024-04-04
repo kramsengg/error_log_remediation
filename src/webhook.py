@@ -72,11 +72,14 @@ def webhook():
         refined_query = extracted_content
         print(refined_query)
 
-    print("REFINED QUERY ", refined_query)   
-    # Here you can add code to process the error logs and send them to OpenAI API
-    response_data = utils.get_remediations_for_error(client,DOCU_ASSISTANT_ID, refined_query)
-    return jsonify(response_data)
-    #return jsonify(success=True)
+    print("REFINED QUERY ", refined_query) 
+    if refined_query:  
+        # Here you can add code to process the error logs and send them to OpenAI API
+        response_data = utils.get_remediations_for_error(client,DOCU_ASSISTANT_ID, refined_query)
+        return jsonify(response_data)
+    else:
+        response_data = jsonify({"result":"error log is empty"})
+        return response_data
 
 @app.route('/get_remediations', methods=['POST'])
 def get_remediations_error_logs():
